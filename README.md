@@ -10,9 +10,9 @@ User can select a candidate from words collected from active buffer.
 
 1. Move the cursor to the right edge of a half-finished word.
 2. Press Ctrl-e, type 'wordCompletion' then Enter.
-3.  If there is only one candidate, the rest of the word is imidiately filled.  
+3.  If there is only one candidate, the rest of the word is immediately filled.  
     
-    Otherwise, an instant pane opens and shows indexed candidates.  
+    Otherwise, a pane opens at the bottom and shows indexed candidates.  
     Type one of indexes and Enter.
 
 ## Installation
