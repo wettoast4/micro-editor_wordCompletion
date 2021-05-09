@@ -9,15 +9,21 @@ User can select a candidate from words collected from active buffer.
 ## Usage 
 
 1. Move the cursor to the right edge of a half-finished word.
-2. Press Ctrl-e, type 'wordCompletion' then Enter.
-3.  If there is only one candidate, the rest of the word is immediately filled.  
+2. In command mode (Ctrl-e), enter 'wordCompletion'.
+3.  -   If there is only one candidate, the rest of the word is immediately filled.
     
-    Otherwise, a pane opens at the bottom and shows indexed candidates.  
-    Type one of indexes and Enter.
+    -   Otherwise, a pane opens at the bottom and shows indexed candidates.  
+        Enter one of indexes to choose.
+    
+    -   Pressing Esc key or entering any character other than shown indexes,  
+        you can cancel the completion.
 
 ## Installation
 
-Move 'wordCompletion.lua' file into '~/.config/micro/plug/'  
+Put the file at the location as below.  
+
+'~/.config/micro/plug/wordCompletion/wordCompletion.lua'  
+
 
 ### Add keybinding (optional) 
 

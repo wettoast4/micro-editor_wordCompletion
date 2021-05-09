@@ -22,8 +22,7 @@ end
 
 --make a table of candidates by scanning the current document, 
 -- in which the prefix of elements is similar to the half-finished word at current position.
-local function getCandidates (bp)
-    local word   = getCurrentWordHead(bp) 
+local function getCandidates (bp, word)
     local endpos   = bp.Buf:End() 
     local len = 0
     
@@ -49,7 +48,8 @@ end
 --Otherwise, all unique prefixed words in the current pane is listed on the instant bufferpane,
 -- then let user choose an index from the candidates.
 local function wordCompletion (bp)
-    local cand, len = getCandidates(bp)
+    local word   = getCurrentWordHead(bp) 
+    local cand, len = getCandidates(bp, word)
     if #cand == 1 then 
         local loc = -bp.Cursor.Loc
         bp.Buf:Replace(buffer.Loc(loc.X - len, loc.Y), loc  , cand[1])
