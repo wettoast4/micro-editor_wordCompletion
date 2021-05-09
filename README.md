@@ -1,6 +1,6 @@
 # micro-editor_wordCompletion
 
-**word completion plugin for the micro editor  **
+**word completion plugin for the micro editor**  
 
 This plugin adds a command to execute word completion.  
 
