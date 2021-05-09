@@ -27,8 +27,8 @@ Example:
 
 ```json
 {
-    ... ,
-    ... ,
+    "~~~~": "~~~~",
+    "~~~~": "~~~~",
     "CtrlSpace": "command:wordCompletion"
 }
 ```
