@@ -11,7 +11,7 @@ local utf8   = import("utf8")
 local function getCurrentWordHead(bp)
     local curpos = -bp.Cursor.Loc
     local curlinetopos =  " " .. util.String(bp.Buf:Substr(buffer.Loc(0,curpos.Y), curpos ))
-    local matched  = curlinetopos:match ("[ \t%!%@%#%$%%%^%&%*%(%)%-%_%+%=%\%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]([^ \t%!%@%#%$%%%^%&%*%(%)%+%=%\%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]+)$")
+    local matched  = curlinetopos:match ("[ \t%!%@%#%$%%%^%&%*%(%)%-%_%+%=%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]([^ \t%!%@%#%$%%%^%&%*%(%)%+%=%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]+)$")
     if matched ~= nil then 
         local word = matched:sub(1, #matched) 
         return word
@@ -33,7 +33,7 @@ local function getCandidates (bp, word)
         len = utf8.RuneCountInString(word) 
         for i = 0 , endpos.Y do 
             local line = " " .. bp.Buf:Line(i)
-            for x in line:gmatch("[ \t%!%@%#%$%%%^%&%*%(%)%-%_%+%=%\%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?](" .. word .. "[^ \t%!%@%#%$%%%^%&%*%(%)%+%=%\%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]*)") do 
+            for x in line:gmatch("[ \t%!%@%#%$%%%^%&%*%(%)%-%_%+%=%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?](" .. word .. "[^ \t%!%@%#%$%%%^%&%*%(%)%+%=%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]*)") do 
                 if keys[x] == nil and x ~= word then 
                     table.insert(t , x) 
                     keys[x]= true
