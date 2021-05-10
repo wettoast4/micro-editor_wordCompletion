@@ -1,20 +1,21 @@
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 local micro  = import("micro")
 local util   = import("micro/util")
 local config = import("micro/config")
 local buffer = import("micro/buffer")
 
+local utf8   = import("utf8") 
+
 --get a half-finished word at the cursor position .
 local function getCurrentWordHead(bp)
     local curpos = -bp.Cursor.Loc
-    local curline =  util.String(bp.Buf:Line(curpos.Y))
-    local revfromcurpos = curline:sub(0,curpos.X):reverse() 
-    local rword = revfromcurpos:match("^[a-zA-Z0-9%-%_]*[a-zA-Z]")
-    if rword ~= nil then 
-        local word = rword:reverse()
+    local curlinetopos =  " " .. util.String(bp.Buf:Substr(buffer.Loc(0,curpos.Y), curpos ))
+    local matched  = curlinetopos:match ("[ \t%!%@%#%$%%%^%&%*%(%)%-%_%+%=%\%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]([^ \t%!%@%#%$%%%^%&%*%(%)%+%=%\%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]+)$")
+    if matched ~= nil then 
+        local word = matched:sub(1, #matched) 
         return word
-    else
+    else 
         return nil 
     end
 end
@@ -29,10 +30,10 @@ local function getCandidates (bp, word)
     local t = {}
     local keys = {}
     if word ~= nil then 
-        len = #word
+        len = utf8.RuneCountInString(word) 
         for i = 0 , endpos.Y do 
-            local line = " " .. util.String(bp.Buf:Line(i))
-            for x in line:gmatch("[^a-zA-Z0-9](" .. word .. "[a-zA-Z0-9%-%_]*)") do 
+            local line = " " .. bp.Buf:Line(i)
+            for x in line:gmatch("[ \t%!%@%#%$%%%^%&%*%(%)%-%_%+%=%\%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?](" .. word .. "[^ \t%!%@%#%$%%%^%&%*%(%)%+%=%\%\%~%`%[%{%]%}%;%:%'%\"%<%>%,%.%/%?]*)") do 
                 if keys[x] == nil and x ~= word then 
                     table.insert(t , x) 
                     keys[x]= true
