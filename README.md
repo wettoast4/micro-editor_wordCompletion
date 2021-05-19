@@ -4,6 +4,10 @@
 
 This plugin adds a command to execute word completion. User can select a candidate from words collected from active buffer.  
 
+***After creating this plugin, I noticed that Tab key 
+autocompletes a word not only in command mode but also in a bufpane.***
+(Ctrl-I possibly work as a Tab key and be available as well)
+
 ## Usage 
 
 1. Move the cursor to the right edge of a half-finished word.
